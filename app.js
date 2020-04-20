@@ -21,9 +21,9 @@ class School {
   //setters:
   set numberofStudents(students) {
     if (typeof students === "number") {
-      this._numberofStudents = students;
+      return (this._numberofStudents = students);
     } else {
-      console.log("Wrong input!");
+      return console.log("Wrong input!");
     }
   }
 
@@ -36,8 +36,54 @@ class School {
 
   static pickSubstituteTeacher(substituteTeachers) {
     const randomIndexNumber = Math.floor(
-      Math.random() * (substituteTeachers.length - 1)
+      Math.random() * substituteTeachers.length
     );
     return substituteTeachers[randomIndexNumber];
   }
 }
+
+class PrimarySchool extends School {
+  constructor(name, numberofStudents, pickupPolicy) {
+    super(name, "Primary", numberofStudents);
+    this._pickupPolicy = pickupPolicy;
+  }
+  //getters:
+  get pickupPolicy() {
+    return this._pickupPolicy;
+  }
+}
+
+class HighSchool extends School {
+  constructor(name, numberofStudents, sportsTeams) {
+    super(name, "High School", numberofStudents);
+    this._sportsTeams = sportsTeams;
+  }
+  //getter:
+  get sportsTeams() {
+    return this._sportsTeams;
+  }
+}
+
+//instances of classes:
+const lorraineHansbury = new PrimarySchool(
+  "Lorraine Hansbury",
+  514,
+  "Students must be picked up by a parent, guardian, or a family member over the age of 13."
+);
+lorraineHansbury.quickFacts();
+const subTeacher = School.pickSubstituteTeacher([
+  "Jamal Crawford",
+  "Lou Williams",
+  "J. R. Smith",
+  "James Harden",
+  "Jason Terry",
+  "Manu Ginobli",
+]);
+console.log(subTeacher);
+
+const alSmith = new HighSchool("Al E. Smsith", 415, [
+  "Baseball",
+  "Basketball",
+  "Volleyball",
+  "Track and Field",
+]);
